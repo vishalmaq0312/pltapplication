@@ -1,0 +1,164 @@
+﻿@model PLT_Frontend.Models.CapacityReportDetails
+@{
+    ViewBag.Title = "Embed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    window.onload = function () {
+        console.log(globals.pltAppMode);
+        globals.pltAppMode = "UserOwnsData";
+        $('#checktoggle').on('change', () => {
+            if ($('#checktoggle').is(":checked")) {
+                location.href = '@Url.Action("AppOwnsHomePage", "AppOwnsPLT")';
+            }
+            else {
+                location.href = '@Url.Action("UserOwnsPLTView", "UserOwnsPLT")';
+            }
+        });
+        $(".embed_header_title").on("click", function () {
+            location.href = '@Url.Action("UserOwnsPLTView", "UserOwnsPLT")';
+        });
+        $(".embed_backbutton").on("click", function () {
+            location.href = '@Url.Action("UserOwnsPLTView", "UserOwnsPLT")';
+        });
+    };
+</script>
+
+<header>
+    <div>
+        <div class="child1">
+            <img src="~/Content/img/Logo.svg" style=" width: 52px;height: 35px;" />
+        </div>
+        <div class="child1">
+            <span id="app_name" class="embed_header_title title_color"><strong class="text_style">Power BI Load Analyzer</strong></span>
+        </div>
+
+    </div>
+    <div id="tagline"><span class="text_style">Discover, Analyze and Optimize your Desired Report</span></div>
+    <div id="toggle_style">
+        <div class="user_mode">User</div>
+        <input id="checktoggle" type="checkbox" />
+        <label for="checktoggle" id="myLabel" title="Switch to Service principal"></label>
+        <div class="service_principle_mode">Service principal<span class="info_navbar_circle" title="Running as PLTSPN">i</span></div>
+    </div>
+
+    <img id="separator" src="~/Content/img/Separator.svg" alt="separator" />
+
+    <div id="userName" class="username cursor">
+        <div class="username-container">
+            <span id="username_cursor">@Model.UserName.Split(' ')[0] @Model.UserName.Split(' ')[1]</span>
+            <div id="circle"></div>
+        </div>
+
+        <div class="user-profile">
+            <div class="parent-container" style="position: relative;">
+                <div id="circle2" class="child" style="position: absolute; top: 10px;"></div>
+                <div class="container-style" style=" position: absolute; top: 41px; line-height: 0;">
+                    <div id="username-popup" class="username child">@Model.UserName.Split(' ')[0] @Model.UserName.Split(' ')[1]</div>
+                    <div id="useremail-popup" class="useremail child">@Model.UserEmail</div>
+                </div>
+            </div>
+            <div class="signout cursor" style="position: absolute; top: 62px; border: 1px solid #CCCCCC; border-radius: 0px 0px 4px 4px;">
+                <img class="signout-svg" src="../../Content/img/Sign-out.svg" alt="Sign Out" width="15" height="30" style="margin-left: 11px;" />
+                <span>Sign out</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="embed_body">
+
+    <div class="breadcrumb">
+        <a class="embed_backbutton cursor">Home page</a>
+        <span class="arrow-container"><img src="~/Content/img/Arrow 1.svg" alt="Arrow"></span>
+        <span>Capacity Metric Report</span>
+    </div>
+
+    <div id="capacity_description"><span>About the report: Discover, Analyze and Optimize your Desired Report</span></div>
+
+    <div class="embed_table_capacity">
+        <div style="height:140vh" id="embedContainer"></div>
+    </div>
+</div>
+<div>
+    <footer class="footerStyle"><span class="company">Created by <span class="company_name">MAQ</span> Software</span></footer>
+</div>
+
+<script>
+    loggedInUser.accessToken = "@Model.AccessToken";
+
+    // Retrieve Power BI hostname from Web.config file
+    globals.powerBiHostname = '@System.Configuration.ConfigurationManager.AppSettings["powerBiHostname"]';
+
+    // Cache base endpoint for Power BI REST API
+    globals.powerBiApi = '@System.Configuration.ConfigurationManager.AppSettings["powerBiApiUrl"]' + '/v1.0/myorg';
+
+    // Get the username text
+    let username = document.querySelector('#username_cursor').textContent;
+
+    // Split the username into an array of words
+    let nameArr = username.split(' ');
+    // Get the first letters of the first name and last name
+    let firstLetter = nameArr[0].charAt(0);
+    let lastLetter = nameArr[1].charAt(0);
+
+    // Get the circle element
+    let circle = document.querySelector('#circle');
+    let circle2 = document.querySelector('#circle2');
+
+    // Add the first letters inside the circle
+    circle.textContent = firstLetter + lastLetter;
+    circle2.textContent = firstLetter + lastLetter;
+
+    /*UserOwns Capacity Embed Token Generate*/
+
+
+
+
+    //User owns Capacity Embed Report code
+
+    // Get a reference to the embedded report HTML element
+    const reportContainer = $('#embedContainer')[0];
+
+    // Read embed application token from Model
+    const embedToken = "@Model.Capacity_report_embed_token";
+
+    // Read embed URL from Model
+    const embedUrl = "@Model.Capacity_embed_url";
+
+    // Read report Id from Model
+    const embedReportId = "@Model.Capacity_Report_Id";
+
+
+/*    const config = {
+        type: 'report',
+        tokenType: 1,
+        accessToken: embedToken,
+        embedUrl: embedUrl,
+        id: embedReportId,
+        permissions: 7,
+        settings: {
+            filterPaneEnabled: true,
+            navContentPaneEnabled: true
+        }
+    };*/
+
+    const config = {
+        type: 'report',
+        tokenType: 1,
+        accessToken: embedToken,
+        embedUrl: embedUrl,
+        id: embedReportId,
+        permissions: 7,
+        settings: {
+            // Enable this setting to remove gray shoulders from embedded report
+            // background: models.BackgroundType.Transparent,
+            filterPaneEnabled: false, // Set to false to hide the filter pane
+            navContentPaneEnabled: true
+        }
+    };
+
+    // Embed the report and display it within the div container.
+    const report = powerbi.embed(reportContainer, config);
+</script>

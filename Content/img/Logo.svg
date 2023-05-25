@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="89" height="57" viewBox="0 0 89 57">
+  <defs>
+    <clipPath id="clip-svg_for_metric">
+      <rect width="89" height="57"/>
+    </clipPath>
+  </defs>
+  <g id="svg_for_metric" data-name="svg for metric" clip-path="url(#clip-svg_for_metric)">
+    <rect width="89" height="57" fill="#BA1B1A"/>
+    <g id="Group_32" data-name="Group 32" transform="translate(-11690.5 -4620.223)">
+      <path id="Path_37" data-name="Path 37" d="M32,0a32,32,0,0,1,0,64" transform="translate(11703 4696) rotate(-90)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="4" stroke-dasharray="70 0"/>
+      <path id="Path_40" data-name="Path 40" d="M11659.827,4574.753l-5.156-2.332" transform="translate(7324.64 -7087.048) rotate(48)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <path id="Path_43" data-name="Path 43" d="M11659.827,4574.753l-5.156-2.332" transform="translate(12919.266 -7831.52) rotate(74)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <path id="Path_41" data-name="Path 41" d="M11659.827,4574.753l-5.156-2.332" transform="matrix(0.982, 0.191, -0.191, 0.982, 1145.633, -2071.562)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <path id="Path_42" data-name="Path 42" d="M11659.827,4574.753l-5.156-2.332" transform="translate(-565.321 2173.792) rotate(-10)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <path id="Path_44" data-name="Path 44" d="M11659.827,4574.753l-5.156-2.332" transform="translate(17318.205 -6576.806) rotate(95)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <path id="Path_45" data-name="Path 45" d="M11659.827,4574.753l-5.156-2.332" transform="translate(23055.16 -754.352) rotate(133)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+      <path id="Path_46" data-name="Path 46" d="M11710.22,4559.3l-28.843,23.978v5.163h5.52Z" transform="translate(51 77)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

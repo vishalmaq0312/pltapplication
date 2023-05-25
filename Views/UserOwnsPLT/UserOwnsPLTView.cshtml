@@ -1,0 +1,400 @@
+﻿@*
+     ----------------------------------------------------------------------------
+    This file is the View name UserOwnsPLTView which is rendered at the start of UserOwnsData mode.
+    The controller corresponsding to this view is UserOwnsPLTController.
+     ----------------------------------------------------------------------------
+*@
+
+@model PLT_Frontend.Models.AuthPLTViewModel
+
+@{
+    ViewBag.Title = "PLTView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    HashSet<string> distinctWorkspaces = new HashSet<string>();
+    HashSet<string> distinctReports = new HashSet<string>();
+    HashSet<string> distinctPages = new HashSet<string>();
+    HashSet<string> distinctStatus = new HashSet<string>();
+    foreach (var item in Model.PLTModel)
+    {
+        distinctWorkspaces.Add(@item.WorkspaceName);
+        distinctReports.Add(@item.ReportName);
+        distinctPages.Add(@item.PageName);
+        distinctStatus.Add(@item.Status);
+    }
+}
+<script type="text/javascript">
+        window.onload = function () {
+            globals.pltAppMode = "UserOwnsData";
+    
+             $('#checktoggle').on('change', () => {
+
+                 if ($('#checktoggle').is(":checked")) {
+                     location.href = '@Url.Action("AppOwnsHomePage", "AppOwnsPLT")';
+                }
+                else {
+                     location.href = '@Url.Action("UserOwnsPLTView", "UserOwnsPLT")';
+                }
+             })
+            $(".plt_addreport").on("click", function () {
+                location.href = '@Url.Action("UserOwnsAddPLT", "UserOwnsEmbedInfo")';
+            });
+            $("#capacity-metrics").on("click", function () {
+                location.href = '@Url.Action("UserOwnsCapacityMetrics", "UserOwnsPLT")';
+            });
+    };
+    globals.pltAppMode = "UserOwnsData";
+</script>
+
+<header>
+    <div>
+        <div class="child1">
+            <img id="logo-style" src="~/Content/img/Logo.svg"/>
+        </div>
+        <div class="child1" >
+            <span id="app_name" class="embed_header_title title_color"><strong class="text_style">Power BI Load Analyzer</strong></span>
+        </div>
+
+    </div>
+    <div id="tagline"><span class="text_style">Discover, Analyze and Optimize your Desired Report</span></div>
+
+    <div id="toggle_style">
+        <div class="user_mode">User</div>
+        <input id="checktoggle" type="checkbox" />
+        <label for="checktoggle" id="myLabel" title="Switch to Service principal"></label>
+        <div class="service_principle_mode">Service principal<span class="info_navbar_circle" title="Running as PLTSPN">i</span></div>
+    </div>
+
+    <img id="separator" src="~/Content/img/Separator.svg" alt="separator" />
+
+    <div id="userName" class="username cursor">
+        <div class="username-container">
+            <span id="username_cursor">@Model.AuthDetails.UserName.Split(' ')[0] @Model.AuthDetails.UserName.Split(' ')[1]</span>
+            <div id="circle"></div>
+        </div>
+        <div class="user-profile">
+            <div class="parent-container">
+                <div id="circle2" class="child"></div>
+                <div class="container-style">
+                    <div id="username-popup" class="username child">@Model.AuthDetails.UserName.Split(' ')[0] @Model.AuthDetails.UserName.Split(' ')[1]</div>
+                    <div id="useremail-popup" class="useremail child">@Model.AuthDetails.UserEmail</div>
+                </div>
+            </div>
+            <div class="signout cursor">
+                    <img class="signout-svg" src="../../Content/img/Sign-out.svg" alt="Sign Out" width="15" height="30"/>
+                    <span>Sign out</span>
+                </div> 
+        </div>
+    </div>
+</header>
+
+<div class="before_slicer">
+    <div>
+        <button type="button" class="plt_addreport" style="outline: none;">
+            <img id="select_report_style" src="~/Content/img/select_report_page.svg" alt="Adding Report" width="25" height="30" />
+            <span title="Select a report/page to trigger its PLT">Select a report/page</span>
+        </button>
+    </div>
+
+@*    <div class="analytic_slicer">
+        <div class="style-popup-analytic">
+            <img class="cursor" id="analytic_img" src="~/Content/img/analytic_icon.svg" alt="Adding Report" width="25" height="30" />
+        </div>
+        <div class="capacity-dropdown cursor">
+            <div class="dropdown-toggle cursor" onclick="toggleDropdown(event)"><span id="analytic">Analytic reports</span></div>
+            <div class="anaytic-dropdown-menu" id="dropdownMenu" style="display: none;">
+                <div id="trend" class="analytic_items" onclick="selectItem('Item 1')">Trend</div>
+                <div id="capacity-metrics" class="analytic_items" onclick="selectItem('Item 2')">Capacity Metrics</div>
+            </div>
+        </div>
+    </div>*@
+</div>
+
+<div class="embed_body">
+    <div class="plt_slicers">
+        <div class="plt_config-container-row">
+            <label class="slicer_styling" for="plt_workspace-select">Workspace</label><br />
+            <select id="plt_workspace-select" class="custom_select">
+                <option value="" selected>Select</option>
+                @foreach (var item in distinctWorkspaces)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+
+        <div class="plt_config-container-row">
+            <label class="slicer_styling" for="report-select">Reports</label><br />
+            <select id="report-select" class="custom_select">
+                <option value="" selected>Select</option>
+                @foreach (var item in distinctReports)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+        <div class="plt_config-container-row">
+            <label class="slicer_styling" for="page-select">Pages</label><br />
+            <select id="page-select" class="custom_select">
+                <option value="" selected>Select</option>
+                @foreach (var item in distinctPages)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+        <div class="plt_config-container-row">
+            <label class="slicer_styling" for="status-select">Status</label><br />
+            <select id="status-select" class="custom_select">
+                <option value="" selected>Select</option>
+                @foreach (var item in distinctStatus)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+        <div id="reset" class="plt-btn">
+            <button class="reset_button" style="outline: none;"
+                onclick="this.style.backgroundColor = '#ECC9C9';"
+                onmouseover="this.style.backgroundColor = '#F0F0F0'; this.style.boxShadow = '2px 2px 5px rgba(0, 0, 0, 0.2)';"
+                onmouseout="this.style.backgroundColor = '#ffffff'; this.style.boxShadow = '0px 1px 2px black';">
+                <img src="../../Content/img/RefreshBtn.svg" alt="Reset" />
+                <span id="text-reset" title="Reset applied filters">Reset filters</span>
+            </button>
+        </div>
+        <div class="plt-btn">
+            <button id="home_refresh_button" class="refreshTable" style="outline: none;"
+                    onclick="this.style.backgroundColor = '#ECC9C9';"
+                    onmouseover="this.style.backgroundColor = '#F0F0F0'; this.style.boxShadow = '2px 2px 5px rgba(0, 0, 0, 0.2)';"
+                    onmouseout="this.style.backgroundColor = '#ffffff'; this.style.boxShadow = '0px 1px 2px black';">
+                <img src="../../Content/img/RefreshBtn.svg" alt="Refresh" />
+                <span id="text-refresh" title="Refresh Last runtime">Refresh</span>
+            </button>
+        </div>
+    </div>
+    <div class="embed_table_div">
+        <div id="loader-image">
+            <i class="fa fa-spinner fa-spin" style="font-size:60px"></i>
+        </div>
+        <table id="myTable" class="reportName_table">
+            <tr>
+                <th class="thtable">Page</th>
+                <th id="PLT_column" class="reportName_columns">PLT (secs)</th>
+                <th id="Users_column" class="reportName_columns">Users</th>
+                <th id="LastRuntime_column">Last runtime</th>
+                <th class="status_field">Status</th>
+                <th class="action_field">Action</th>
+
+            </tr>
+            @foreach (var item in Model.PLTModel)
+            {
+                <tr workspace-name="@item.WorkspaceName" report-name="@item.ReportName" page-name="@item.PageName" status-name="@item.Status">
+                    <td class="plt_table_td_firstchild">
+                        <img class="plt_file_svg" src="../../Content/img/File.svg" alt="PLT File" width="30" height="30" />
+                        <div class="page_hierarchy" title="@Html.DisplayFor(modelItem => item.WorkspaceName) > @Html.DisplayFor(modelItem => item.ReportName) > @Html.DisplayFor(modelItem => item.PageName)">
+                            @Html.DisplayFor(modelItem => item.WorkspaceName) > @Html.DisplayFor(modelItem => item.ReportName) > <span id="page_name_style">@Html.DisplayFor(modelItem => item.PageName)</span>
+                        </div>
+                    </td>
+                    <td>
+                        @if (item.PLT == 0)
+                        {
+                            if (item.Status == "Failed" || item.Status == "Not started")
+                            {
+                                <p class="failed_notStarted"> _ </p>
+                            }
+                            else if (item.Status == "In progress")
+                            {
+                                <img id="in_progress_plt" class="plt_file_svg_plt" src="../../Content/img/Load.svg" alt="In Progess" width="30" height="30" title="PLT calculation is in progress" />
+                            }
+                        }
+                        else
+                        {
+                            if (item.Status == "Passed")
+                            {
+                                <div class="numeric_data">@Html.DisplayFor(modelItem => item.PLT)</div>
+                            }
+
+
+                        }
+                    </td>
+                    <td class="numeric_data">
+                        @Html.DisplayFor(modelItem => item.UserLoadCount)
+                    </td>
+                    <td>
+                        @if (item.EndTime == "")
+                        {
+                            if (item.Status == "Not started")
+                            {
+                                <p id="not_started"> _ </p>
+                            }
+                            else if (item.Status == "In progress")
+                            {
+                                <img id="in_progress" class="plt_file_svg" src="../../Content/img/Load.svg" alt="In Progress" width="30" height="30" title="PLT calculation is in progress" />
+                            }
+                            else if (item.Status == "Failed")
+                            {
+                                <p class="LRT">@DateTime.Parse(item.CurrentDate).ToString("G")</p>
+                            }
+                        }
+                        else
+                        {
+                            <p class="LRT">@DateTime.Parse(item.EndTime).ToString("G")</p>
+                        }
+                    </td>
+                    <td id="status_button">
+                        @if (item.Status == "Not started")
+                        {
+                            <div class="not-started-status">
+                                <img class="status-image-section" src="../../Content/img/NotStarted-Icon.svg" alt="Not Started" />
+                                <span class="status-text-section">@Html.DisplayFor(modelItem => item.Status)</span>
+                            </div>
+                        }
+                        else if (item.Status == "In progress" && item.PLT == 0)
+                        {
+                            <div class="in-progress-status">
+                                <img class="status-image-section" src="../../Content/img/Inprogress-Icon.svg" alt="In Progress" />
+                                <span class="status-text-section">@Html.DisplayFor(modelItem => item.Status)</span>
+                            </div>
+                        }
+
+                        else if (item.Status == "Passed" && item.PLT != 0)
+                        {
+                            <div class="completed-status">
+                                <img class="status-image-section" src="../../Content/img/Completed-Icon.svg" alt="Passed" />
+                                <span class="status-text-section">@Html.DisplayFor(modelItem => item.Status)</span>
+                            </div>
+
+                        }
+                        else if (item.Status == "Failed")
+                        {
+                            <div class="failed-status">
+                                <img class="status-image-section" src="../../Content/img/Failed-Icon.svg" alt="Failed" />
+                                <span class="status-text-section" title="@Html.DisplayFor(modelItem => item.ErrorMessage)">@Html.DisplayFor(modelItem => item.Status)</span>
+                            </div>
+
+                        }
+
+                    </td>
+                    <td id="action-btn">
+                        @if (item.Status == "Passed" || item.Status == "In progress" || item.Status == "Not started")
+                        {
+                            <button id="@item.Id" class="trigger_button cursor disabled"
+                                    style="outline:none;"
+                                    onmouseover="if (!this.classList.contains('clicked')) { this.classList.add('hover'); }"
+                                    onmouseout="this.classList.remove('hover');" disabled>
+                                <span>Reload PLT</span>
+                            </button>
+                        }
+                        else
+                        {
+                            <button id="@item.Id" class="trigger_button cursor "
+                                    style="outline:none;"
+                                    onclick="this.classList.toggle('clicked');"
+                                    onmouseover="if (!this.classList.contains('clicked')) { this.classList.add('hover'); }"
+                                    onmouseout="this.classList.remove('hover');">
+                                <span>Reload PLT</span>
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<footer class="footerStyle"><span class="company">Created by <span class="company_name">MAQ</span> Software</span></footer>
+
+<script>
+   /* document.addEventListener('click', function (event) {
+        var dropdownMenu = document.getElementById("dropdownMenu");
+        var targetElement = event.target; // Clicked element
+
+        // Check if the clicked element is inside the dropdown
+        if (targetElement.closest('.capacity-dropdown') !== null) {
+            return;
+        }
+
+        // If not, close the dropdown
+        dropdownMenu.style.display = "none";
+    });
+
+    function toggleDropdown(event) {
+        event.stopPropagation(); // Prevent the event from bubbling up
+
+        var dropdownMenu = document.getElementById("dropdownMenu");
+        if (dropdownMenu.style.display === "none") {
+            dropdownMenu.style.display = "block";
+        } else {
+            dropdownMenu.style.display = "none";
+        }
+    }
+
+    function selectItem(item) {
+        // Do something with the selected item
+        console.log("Selected Item: " + item);
+        // Hide the dropdown menu
+        var dropdownMenu = document.getElementById("dropdownMenu");
+        dropdownMenu.style.display = "none";
+    }*/
+
+    loggedInUser.accessToken = "@Model.AuthDetails.AccessToken";
+
+   // Retrieve Power BI hostname from Web.config file
+    globals.powerBiHostname = '@System.Configuration.ConfigurationManager.AppSettings["powerBiHostname"]';
+
+   // Cache base endpoint for Power BI REST API
+    globals.powerBiApi = '@System.Configuration.ConfigurationManager.AppSettings["powerBiApiUrl"]' + '/v1.0/myorg';
+
+     // Get the username text
+    let username = document.querySelector('#username_cursor').textContent;
+
+    // Split the username into an array of words
+    let nameArr = username.split(' ');
+    // Get the first letters of the first name and last name
+    let firstLetter = nameArr[0].charAt(0);
+    let lastLetter = nameArr[1].charAt(0);
+
+    // Get the circle element
+    let circle = document.querySelector('#circle');
+    let circle2 = document.querySelector('#circle2');
+
+    // Add the first letters inside the circle
+    circle.textContent = firstLetter + lastLetter;
+    circle2.textContent = firstLetter + lastLetter;
+
+    //Database Retry Functionality AJAX Request
+    // Get all buttons with class 'rowButton'
+    const buttons = document.querySelectorAll('.trigger_button');
+
+    // Add event listener to each button
+    buttons.forEach((button) => {
+        button.addEventListener('click', function () {
+            // Get the parent row of the clicked button
+            const row = this;
+            console.log(this.parentNode)
+
+            // Get the ID of the row
+            const rowId = row.id;
+
+            // Do something with the row ID
+            console.log('Clicked row ID:', rowId);
+
+            // Send an AJAX request to update the database
+            $.ajax({
+                url: '/UserOwnsPLT/PLTRetry',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ rowId }),
+                success: function (response) {
+                    // Handle the response from the server if needed
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Handle any errors that occurred during the request
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+</script>

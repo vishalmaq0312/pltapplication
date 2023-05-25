@@ -1,0 +1,52 @@
+﻿@*
+     ----------------------------------------------------------------------------
+    This file is the View name AppOwnsURLEmbedReport which is rendered when the user click on the report link(to see the report in user's browser) in AppOwnsData mode.
+    The controller corresponsding to this view is AppOwnsPLTController.
+     ----------------------------------------------------------------------------
+*@
+
+@model PLT_Frontend.Models.AppOwnsReportEmbedConfig
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="height:99vh" id="embedContainer"></div>
+
+
+<script>
+
+    // Get a reference to the embedded report HTML element
+    const reportContainer = $('#embedContainer')[0];
+
+    // Read embed application token from Model
+    const accessToken = "@Model.EmbedToken.Token";
+
+    // Read embed URL from Model
+    const embedUrl = "@Html.Raw(Model.EmbedReports[0].EmbedUrl)";
+
+    // Read report Id from Model
+    const embedReportId = "@Model.EmbedReports[0].ReportId";
+
+    const tokenExpiry = "@Model.EmbedToken.Expiration";
+
+
+    const config = {
+        type: 'report',
+        tokenType: 1,
+        accessToken: accessToken,
+        embedUrl: embedUrl,
+        id: embedReportId,
+        permissions: 7,
+        settings: {
+            // Enable this setting to remove gray shoulders from embedded report
+            // background: models.BackgroundType.Transparent,
+            filterPaneEnabled: true,
+            navContentPaneEnabled: true
+        }
+    };
+
+    // Embed the report and display it within the div container.
+    const report = powerbi.embed(reportContainer, config);
+</script>

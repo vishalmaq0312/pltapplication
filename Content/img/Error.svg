@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <clipPath id="clip-Error">
+      <rect width="40" height="40"/>
+    </clipPath>
+  </defs>
+  <g id="Error" clip-path="url(#clip-Error)">
+    <rect width="40" height="40" fill="#fff"/>
+    <path id="Icon_material-info-outline" data-name="Icon material-info-outline" d="M12,8h2v6H12Zm1,15A10,10,0,1,1,23,13,10,10,0,0,1,13,23ZM13,5a8,8,0,1,0,8,8A8.011,8.011,0,0,0,13,5ZM12,16h2v2H12Z" transform="translate(6.999 7)" fill="#cb0000"/>
+  </g>
+</svg>
