@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="40" viewBox="15 8 17 23">
+  <defs>
+    <clipPath id="clip-Back_arrow">
+      <rect width="40" height="40"/>
+    </clipPath>
+  </defs>
+  <g id="Back_arrow" data-name="Back arrow" clip-path="url(#clip-Back_arrow)">
+    <rect width="40" height="40" fill="none"/>
+    <path id="Icon_material-arrow_back" data-name="Icon material-arrow_back" d="M14,9.5H7.916l2.8-2.8L10,6,6,10l4,4,.705-.705L7.916,10.5H14Z" transform="translate(10.5 9.998)"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="40" viewBox="11 15 18 10">
+  <defs>
+    <clipPath id="clip-Close">
+      <rect width="40" height="40"/>
+    </clipPath>
+  </defs>
+  <g id="Close" clip-path="url(#clip-Close)">
+    <rect width="40" height="40" fill="none"/>
+    <g id="Group_355" data-name="Group 355" transform="translate(-694.244 -50.82)">
+      <path id="Icon_metro-cancel" data-name="Icon metro-cancel" d="M10.79,1.928a8.219,8.219,0,1,0,8.219,8.219A8.219,8.219,0,0,0,10.79,1.928Z" transform="translate(703.454 60.672)" fill="#fff" stroke="#000" stroke-width="1"/>
+      <path id="Icon_metro-cancel-2" data-name="Icon metro-cancel" d="M10.543,4.016,8.28,6.279,6.016,4.016,4.658,5.374,6.922,7.637,4.658,9.9l1.358,1.358L8.28,8.995l2.263,2.263L11.9,9.9,9.637,7.637,11.9,5.374Z" transform="translate(705.965 63.183)"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="40" viewBox="0 0 40 40">
+  <defs>
+    <clipPath id="clip-Plus">
+      <rect width="40" height="40"/>
+    </clipPath>
+  </defs>
+  <g id="Plus" clip-path="url(#clip-Plus)">
+    <rect width="40" height="40" fill="none"/>
+    <path id="Icon_open-plus" data-name="Icon open-plus" d="M6.295,0V6.295H0v4.2H6.295v6.295h4.2V10.491h6.295v-4.2H10.491V0Z" transform="translate(11.607 11.607)" fill="#fff"/>
+  </g>
+</svg>

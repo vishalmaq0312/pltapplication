@@ -1,0 +1,69 @@
+﻿@*
+     ----------------------------------------------------------------------------
+    This file is the View name AppOwnsURLEmbedReport which is rendered when the user click on the report link(to see the report in user's browser) in AppOwnsData mode.
+    The controller corresponsding to this view is AppOwnsPLTController.
+     ----------------------------------------------------------------------------
+*@
+
+@*@model PLT_Frontend.Models.AppOwnsReportEmbedConfig
+*@
+
+
+@model PLT_Frontend.Models.AppOwnsEmbedTokenReport
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="height:99vh" id="embedContainer"></div>
+
+
+<script>
+
+    // Get a reference to the embedded report HTML element
+    const reportContainer = $('#embedContainer')[0];
+
+    // Read embed application token from Model
+    const embedToken = "@Model.WorkspaceEmbedToken";
+
+    // Read embed URL from Model
+    @*const embedUrl = "@Html.Raw(Model.EmbedReports[0].EmbedUrl)";*@
+
+    // Read report Id from Model
+    const embedReportId = "@Model.ReportId";
+
+    const embedWorkspaceId = "@Model.WorkspaceId";
+
+   @* const tokenExpiry = "@Model.EmbedToken.Expiration";*@
+
+    /*const reportId = "4b7250f5-eec9-4fa2-bb80-2873bc4df096";
+    const groupId = "d913695e-adca-40af-88f8-1028729f1232";
+    const pageId = "ReportSection";*/
+
+    const embedTokenUrl = `https://app.powerbi.com/reportEmbed?reportId=${embedReportId}&groupId=${embedWorkspaceId}&w=2`;
+
+
+
+    //const embedToken = 'H4sIAAAAAAAEAB1XxRLs2hH7l7t1qsyUqrcwjZntMezMzOxU_j1zs9chnW5J_Z8_VvL0U5L_-fefvH1DAgm1E7ArCtwHfdT3DOyOizBpy7F46vx2VkUAKqigGcLTVxFqQFzWuQHyokvI6VzPudgT05rNTz6oQLosgvosQQ3wx7eyz-SGafPgAMkmbphCSmNTexsLoO9YfDMRDlw7Qx6GQDAjzoZZAwhN6TToTsINtVcmg30taJudspYP2xFqpX6yVhXfvar3b6fztzhhTpLSS30jyqmQPjmOEzjrN69tikgYB2T1qDBI6bqZTN5St53eh6K7WhkSZFRxK3pnPuZfnKVm3V5_4q4dZkrSdYWKCNiXfF_G2vLykAeQbcI2eUbWPkUo4WaOyWh1I339gz6nLqiXsmbYd_VEmq0_BJULY5oz32YHR9WDccM-5nrcotlgIwdmxoU4mEd-atjaRcfwZPIZrmt2WLxWLg6j-TkZVjrE4LWkssS6GDDSd0X-0hO3YLknPRY1fAjZCsaV8Zci28bCELUAGHiY8MxmeCjfwNK96Z-Pvm5zDQf3_UR4BbufnZEv2QRhrzgVcwlR722B5SXET6Sd3WRORPc2i6vK7wV6ynl64_a0vOFTNLRTsQwyRaF7m3tz_YIEdutDzFuG_Do1NUnsNYBv1ZcVNoHB6K704I2kbiSB4PhAI_gdi5xrC_lS8_TlC69Za1cZx1zjPfJCiU-JIiVde2MrICgLlAxcfBYaulbUeeyyMyJ8ExZQ1tTfj3gXwPra6unZSKRZxRwEFzTokOd5AFcr-xVou8c_TgsP5qT3bXT8eBEoRUrv9bX1MgpBcaWVz1i5MmPuGoVY16GYTcKg7aABSKOG36I3qNszXu8F0hxhay9dgZmWBdWZsCzVQi7x2Ri-njinFs609RwVWjYuBnprjealYIor9o_WTMhdljH_qesjM8B8FDAd_M5C0eamtU7Zh3sNX2ThWjH4XAzyETOqHSsqtkCy6Gy4czJEdhEkGlITCe_hZXL39eIx56OhE6jCbMN96lVPcLT0H0V-AWUXairn98RBW5KKaJZ5lIw9mOkFNBnGH88cjWJL89TKdlQApRfGJwEnRuDdy8nIjqES7hRGuldA35I1WR1685MeAbzkNaNvYS9YoJBPzyCSgUTtqmmMPlhUswh1HqHgvVOtC1d9XHFoeB8o_4grZRajy12qiqihelSau7cGiSmb20fQQq3nKiQ0MZV2_pBbeW0402zr9biha4LRhJ9axmx0F36_bj3jD3zegraDddgF87mbW2w5dxDphN-hOKlsUl4gkTVZqOEKFOSJasFYB1_En17jwsR6uRRg31xd4mIDbz9X7h1V97DomgnmeabazMJScmNxyRrld1uSmM4W3S8yzOkCbNd5-uL3SoUJQAfSIaJf2brqNxbGXjWs1g_LwxRnqtt82H_UQtQa_E3qG8Xi-9ExHKMCYSaZWLCBTRPDC9lRIJ6yi7F2zGBnBErIgj1kkWmEb8EVebgUehr695PEwF4XTcYo98ZmoY2nsqUNmCyT0xQMLya8n-QSODW1ZrWxzy6mGPWMwLh2njG2jl04AnbEt57I0UyXHFm2TCszxLVvb1sPOggoDNT0dLkYsX1be_lNlPRw-PNjMpOcNC3htmFo0b52TZGw62iU2ISO7fD-PgPVER83b2kOEgeKJ48iKNL2eOR-WpfjNUCI8Zg706pmYg7xstOULeCYWwFZ6dyjdb7pcciWSMxSntFkoTMhnksfkhoQXgEwGYMwreKhauKKRASVFRPzjMQ3-QrvnKGq9_cmxXgqUY79fKkjY33HfIbGVm4x-h3Re5GtUHDszT4s1VBQjHOFrYSb9bZ0FttCyEL5hozBziueU_uJ0o9LA8x2EfOAtM_M7MbidWXWmuoquENCHsotH4hOqdh86lO1P6ORUB_Jsoe2aRklFlCLynSLWobzcotDEzPGGOcYrysMOEFSHTrvFKVGVvYpvdESN1ZlLpyGhQLDO-_x6Rk9UgsRz6ml2zz0Muuh8cR-HVePwdZpEoQuw-07l4x2i1vsEvwnwg9MrFQsCLY9SRZW-khFz5MWeX0kgjHpviH0cVaWVkJ_vj0gjz53rISGEMcTuEVUPT-dy6FA-UrOLMxiZYY1Pc4DYuqYTQNxcf1AFgMhszT-DpjthK5Edxbbwo25qfZ308ijJcgDWddbiW3bplAIwOLAG_UA3A_dhBh9Z9gNhQAb_0MvWzwNHiUONdJqB8MX4kN-0EtXYEoRbndAwGen5ae73kVwPtV3Fw_RwE4WKwZkyGXarZjdP3AYwL7z5LfWs6Z6YCy8pKUY7SvArVQOy7HMz5KUtbshVdmK1mNjKQnQVeBM2jiGOtqSiqzxkdKTRI_PQ-hx7TkigGsqC9cgV8HUyJAzM7ehws8hooqTJhTfgWRg2Z_s77LgfVyChQ-2EM1hWpMs0T59RNi4ysHYnE27dtai0y4OtEcE2g6pWdJB063fjcdxqPFLSDG9nJJ485nGuG0RBkmm-dYR8iYWyfyjMiaAKXV_GYAsrcOKqTnYLTZUMYX02pMYGbh57iOZyIXmrSPuZm4aabadAqSiwUcfKTI-W02A_8LTolZX2QCgfjHPxEMQjjJGkHr-dEJBUQnIna8dC3xiICkCo6eQcEQq5Hff8xz5dzJSTNdz3lqBaInEMnwZRlGsNJB4aNQBL8CYGT-ORIxCSRxWaL9JvWymTymDAaDIfQ1ly5J4eQ9URtNSitUFvX41lIGjCLOQMWbNPWciNJBgtfT4CKG_ovkgGBHopIMkjCXhDBQmwNZgaSVh3nrMBYfFkn-cw6nJs-0t4YP4kRWSogRISXczwg3eID2Vby7aS8SM_jd_8V_j5kqlJr-6GpNhQlqrZrwWSrWpZdaDC_KOyNUxRGo6IwC5OdVpawRtFEHoEEJNRr-8-ZKgA5diwyGa_26F7Q72F3599nXqKL-7Du4eScGENKpab6K7ZfMQvjBeq5SnmykziNHMhgqIbDySY9aEwQVnf64Y5tA3cuOZ3c5uWHt31kdpPs2kn6s6atzC0jxYzm-divisnK8IaYs6w7HnSLm1LRR__vWHW595n9Ti-cX5qDEWiyR9tHK79grQ73PzYz2rUlH2b_RllnG3kRpUHCbFJNv17XooLFg_zJQ-3Fzmvmd2OTG15ACBzJo5pw0eVQ2KKr4ChQMDYcZvILDwhDStIMab6tGRCVfW8b2uyx9425-LISLwKTXxLDHybyf60SrQmSyJUDJCdDYR1iaHLOG4iLPw7osCkkOiCxlKyEt0aFrlC4TVC7oTh93bE-KMH5xfoKzWN9vIMDs4328N4tOAvzwIpYSwCnP1eRCRd74tXiSwBVSf_Zpc5pf-LCXBBzIRTdzL7bCyMInapEJuP7c-5kq-1e5PMkfutwW5m80h9otRZtaE7346rjj1oCf5XU-E-eefvzQ_c12s8vfHsv4dFrRHfXAfBVLgHXvZhPr6P8ptqjHZj7X4wQaeC0Z96hnBMUvyxls9_EBCg8Z5IyCqILj4iqApDIRoUfe_Ti0ffJyOiCvLz-sde9b9lbxxajvoTXbQ6BSiJ1cZtM3fXFPUtRySICWjFv9cgaLY0t7vk82gxXCjhaEWNkDFP8J8_DuOxwRkTANp0AxrDSkXxxfrfipEyjR4pYNltU37qdQ9Y-cSqo0FyQKFfZCfK8514zJIwhdT8PyCx6AzVBcbBg16o0gZolBUR2g8kNtoblOAWK4d4ABShPq1QM9grbajoSTGcvnlSvOjVkqPK7SRegSq9bGlWFFPPqrHFT5JJAmcO823-wqHHvFrGXAv6kJnDioZcyvIyJzbilsO9pfm__4Ppj_tjsIOAAA=.eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVdFU1QtVVMtRC1QUklNQVJZLXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0IiwiZXhwIjoxNjgxODA5OTA1LCJhbGxvd0FjY2Vzc092ZXJQdWJsaWNJbnRlcm5ldCI6dHJ1ZX0=';
+
+    const config = {
+        type: 'report',
+        tokenType: 1,
+        accessToken: embedToken,
+        embedUrl: embedTokenUrl,
+        id: embedReportId,
+        permissions: 7,
+        settings: {
+            // Enable this setting to remove gray shoulders from embedded report
+            // background: models.BackgroundType.Transparent,
+            filterPaneEnabled: true,
+            navContentPaneEnabled: true
+        }
+    };
+
+    // Embed the report and display it within the div container.
+    const report = powerbi.embed(reportContainer, config);
+</script>

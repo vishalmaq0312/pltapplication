@@ -1,0 +1,258 @@
+﻿.custom_select {
+    align-self: flex-end;
+    background: #FFFFFF url('../img/Dropdown.svg') no-repeat top right;
+    width: 227px;
+    border-radius: 5px;
+    padding: 0.5vh;
+    padding-left: 0.92vh;
+    padding-right: 44px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: hidden;
+}
+
+.custom_select:focus {
+    outline: none;
+}
+
+.embed_title {
+    color: #BA1B1A;
+    font-size: x-large;
+}
+
+.embed_body {
+    margin: 0px 15px 2px 25px;
+}
+
+.embed_table_div {
+    position: relative;
+    margin-top: 16px;
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    overflow-y: scroll;
+    display: block;
+    height: 70vh;
+}
+
+.embed_table_div_addPLT {
+    position: relative;
+    margin-top: 16px;
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    overflow-y: scroll;
+    display: block;
+    height: 75vh;
+}
+
+th {
+    position: sticky;
+    background-color: white;
+    z-index: 2;
+    top: 0;
+}
+
+.embed_table_left {
+    text-align: left;
+}
+.embed_table_center {
+    text-align: center;
+}
+.embed_table_pages_left{
+    margin-left: 20px;
+}
+
+#workspace_style {
+    margin-top: 17px;
+}
+
+.load_count {
+    position: relative;
+    padding-left: 41px;
+}
+
+.input_box_style {
+    border: 0.75px solid #E7E7E7;
+}
+
+.report_link {
+    text-align: center;
+}
+
+.page_hierarchy_style {
+    padding-left: 45px;
+}
+
+.page_hierarchy_addPLT {
+    padding-left: 3vw;
+}
+
+.embed_noworkspace_message {
+    position: absolute;
+    top: 50%;
+    left: 36.5%;
+    text-align: center;
+    color: #BA1B1A;
+}
+.embed_workspace_img{
+    margin:1%;
+}
+.embed_backbutton {
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    font: normal normal normal 12px/30px Segoe UI;
+}
+
+.info_circle {
+    margin-left: 1px;
+    border: 2px solid #BA8E14;
+    border-radius: 50%;
+    padding: 0px 5.7px;
+    font-weight: bold;
+    font-size: 11px;
+    cursor: pointer;
+    color: #BA8E14;
+}
+
+.info_navbar_circle {
+    margin-left: 6px;
+    margin-right: 1px;
+    background: #ffffff;
+    border-radius: 50%;
+    padding: 0px 7.7px;
+    font-weight: bolder;
+    font-size: 14px;
+    cursor: pointer;
+    color: #BA1B1A;
+    box-shadow: 0px 2px 3px black;
+}
+
+.thtable {
+    width: 58vw;
+}
+
+.thtable_addPLT{
+    width: 73vw;
+}
+
+#PLT_column {
+    width: 110px;
+}
+
+#Users_column {
+    width: 70px;
+}
+
+#LastRuntime_column {
+    width: 200px;
+    padding-left: 24px;
+}
+
+.reportName_columns {
+    text-align: right;
+}
+
+.embed_reportName_columns {
+    text-align: center;
+}
+
+#report_link_column {
+    width: 112px;
+}
+
+#load_testing_column {
+    width: 188px;
+}
+
+#action_column {
+    width: 145px;
+}
+
+@media only screen and (max-width: 1580px) {
+    .thtable {
+        width: 48vw;
+    }
+}
+
+@media only screen and (max-width: 1300px) and (min-width: 1070px) {
+    .select-list {
+        width: 15vw;
+    }
+}
+
+@media only screen and (max-width: 1450px) and (min-width: 1080px) {
+    .embed_table_div {
+        height: 55vh;
+    }
+    .embed_table_div_addPLT {
+        height: 60vh
+    }
+    #useremail-popup {
+        margin-left: 52px;
+    }
+    #tagline {
+        margin-left: 9vw;
+        margin-top: -2px;
+    }
+    .embed_noworkspace_message {
+        top: 55%;
+    }
+    #in_progress {
+        margin-left: 73px;
+    }
+    #LastRuntime_column {
+        width: 215px;
+    }
+}
+
+@media only screen and (max-height: 690px) and (min-height: 570px) {
+    .embed_table_div {
+        height: 55vh;
+    }
+    .embed_table_div_addPLT {
+        height: 60vh
+    }
+    #useremail-popup {
+        margin-left: 52px;
+    }
+    #tagline {
+        margin-left: 9vw;
+        margin-top: -2px;
+    }
+    .embed_noworkspace_message {
+        top: 55%;
+    }
+    #in_progress {
+        margin-left: 73px;
+    }
+    #LastRuntime_column {
+        width: 215px;
+    }
+}
+
+.reportName_table {
+    width: 100%;
+}
+
+.tooltip-inner {
+    white-space: pre-wrap;
+}
+
+#capacity_description {
+    font: normal normal normal 14px/30px Segoe UI;
+}
+
+.embed_table_capacity {
+    position: relative;
+    margin-top: 16px;
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    overflow-y: scroll;
+    display: block;
+    height: 77vh;
+}

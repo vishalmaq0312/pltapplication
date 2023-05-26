@@ -1,0 +1,147 @@
+﻿@*
+     ----------------------------------------------------------------------------
+    This file is the View name UserOwnsAddPLT which is rendered when the user click on the Add PLT button from the Home Page in UserOwnsData mode.
+    The controller corresponsding to this view is UserOwnsPLTController.
+     ----------------------------------------------------------------------------
+*@
+
+
+@model PLT_Frontend.Models.AuthDetails
+@{
+    ViewBag.Title = "Embed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    window.onload = function () {
+        globals.pltAppMode = "UserOwnsData";
+        $('#checktoggle').on('change', () => {
+            if ($('#checktoggle').is(":checked")) {
+                location.href = '@Url.Action("AppOwnsHomePage", "AppOwnsPLT")';
+            }
+            else {
+                location.href = '@Url.Action("UserOwnsPLTView", "UserOwnsPLT")';
+            }
+        });
+        $(".embed_header_title").on("click", function () {
+            location.href = '@Url.Action("UserOwnsPLTView", "UserOwnsPLT")';
+        });
+        $(".embed_backbutton").on("click", function () {
+            location.href = '@Url.Action("UserOwnsPLTView", "UserOwnsPLT")';
+        });
+
+
+    };
+</script>
+
+<header>
+    <div>
+        <div class="child1">
+            <img id="logo-style" src="~/Content/img/Logo.svg"/>
+        </div>
+        <div class="child1">
+            <span id="app_name" class="embed_header_title title_color"><strong class="text_style">Power BI Load Analyzer</strong></span>
+        </div>
+
+    </div>
+    <div id="tagline"><span class="text_style">Discover, Analyze and Optimize your Desired Report</span></div>
+    <div id="toggle_style">
+        <div class="user_mode">User</div>
+        <input id="checktoggle" type="checkbox" />
+        <label for="checktoggle" id="myLabel" title="Switch to Service principal"></label>
+        <div class="service_principle_mode">Service principal<span class="info_navbar_circle" title="Running as PLTSPN">i</span></div>
+    </div>
+
+    <img id="separator" src="~/Content/img/Separator.svg" alt="separator" />
+
+    <div id="userName" class="username cursor">
+        <div class="username-container">
+            <span id="username_cursor">@Model.UserName.Split(' ')[0] @Model.UserName.Split(' ')[1]</span>
+            <div id="circle"></div>
+        </div>
+
+        <div class="user-profile">
+            <div class="parent-container">
+                <div id="circle2" class="child"></div>
+                <div class="container-style">
+                    <div id="username-popup" class="username child">@Model.UserName.Split(' ')[0] @Model.UserName.Split(' ')[1]</div>
+                    <div id="useremail-popup" class="useremail child">@Model.UserEmail</div>
+                </div>
+            </div>
+            <div class="signout cursor">
+                <img class="signout-svg" src="../../Content/img/Sign-out.svg" alt="Sign Out" width="15" height="30"/>
+                <span>Sign out</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+@*Success or error message*@
+<div class="postSaveMessage">
+    <p class="postSaveMessageText"></p>
+    <span><img class="embed_close-svg cursor" src="../../Content/img/Close.svg" width="17" height="17" /></span>
+</div>
+
+<div class="embed_body">
+
+    <div class="breadcrumb">
+        <a class="embed_backbutton cursor">Home page</a>
+        <span class="arrow-container"><img src="~/Content/img/Arrow 1.svg" alt="Arrow"></span>
+            <span>PLT and Load Testing</span>
+    </div>
+
+    <div class="config-container-row">
+        <label class="slicer_styling " id="workId" for="workspace-select">Workspace</label><br />
+        <select id="workspace-select" class="custom_select">
+            <option id="workspace-default-option" value="" disabled selected>Select</option>
+        </select>
+    </div>
+
+    <div class="embed_table_div_addPLT">
+        <table class="reportName_table">
+            <thead>
+                <tr>
+                    <th class="thtable">Report/Page</th>
+                    <th id="report_link_column" class="embed_reportName_columns">Report link</th>
+                    <th id="load_testing_column" class="embed_reportName_columns">Load testing count <span class="info_circle" title="Enter the number of users you want to simulate using
+the page to test the PLT under that specific load">i</span></th>
+                    <th id="action_column" class="embed_reportName_columns">Action</th>
+                </tr>
+            </thead>
+            <tbody id="reports_table"></tbody>
+        </table>
+    </div>
+    <div class="embed_noworkspace_message">
+        <img class="embed_workspace_img" src="~/Content/img/SelectWorkspace.svg" />
+        <p>No Workspace is selected.<br />Select a workspace to calculate PLT and perform load testing</p>
+    </div>
+</div>
+<div>
+    <footer class="footerStyle"><span class="company">Created by <span class="company_name">MAQ</span> Software</span></footer>
+</div>
+
+<script>
+    loggedInUser.accessToken = "@Model.AccessToken";
+
+    // Retrieve Power BI hostname from Web.config file
+    globals.powerBiHostname = '@System.Configuration.ConfigurationManager.AppSettings["powerBiHostname"]';
+
+    // Cache base endpoint for Power BI REST API
+    globals.powerBiApi = '@System.Configuration.ConfigurationManager.AppSettings["powerBiApiUrl"]' + '/v1.0/myorg';
+
+    // Get the username text
+    let username = document.querySelector('#username_cursor').textContent;
+
+    // Split the username into an array of words
+    let nameArr = username.split(' ');
+    // Get the first letters of the first name and last name
+    let firstLetter = nameArr[0].charAt(0);
+    let lastLetter = nameArr[1].charAt(0);
+
+    // Get the circle element
+    let circle = document.querySelector('#circle');
+    let circle2 = document.querySelector('#circle2');
+
+    // Add the first letters inside the circle
+    circle.textContent = firstLetter + lastLetter;
+    circle2.textContent = firstLetter + lastLetter;
+</script>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 40 40">
+  <defs>
+    <clipPath id="clip-Sorting_icon">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="Sorting_icon" data-name="Sorting icon" clip-path="url(#clip-Sorting_icon)">
+    <path id="Icon_material-arrow_back" data-name="Icon material-arrow_back" d="M14,9.5H7.916l2.8-2.8L10,6,6,10l4,4,.705-.705L7.916,10.5H14Z" transform="translate(30.504 9.998) rotate(90)"/>
+  </g>
+</svg>
